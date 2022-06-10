@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import './trending.dart';
 
 void main() {
   runApp(const AppContainer());
@@ -31,7 +32,7 @@ class _MyAppState extends State<MyApp> {
   int selectedIndex = 0;
   static const List<Widget> _pages = <Widget>[
     Home(),
-    Text("Page 2"),
+    Trending(),
     Text("Page 3"),
   ];
   
@@ -39,7 +40,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Welcome to Flutter'),
+        title: const Text('Awesome Movie Picker'),
       ),
       body: _pages.elementAt(selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
@@ -98,5 +99,4 @@ class _Home extends State<Home> {
       ),
     );
   }
-
 }
