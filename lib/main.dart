@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import './trending.dart';
+import './picker.dart';
 
 void main() {
   runApp(const AppContainer());
@@ -28,11 +29,12 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
+// TODO: Use TabController
 class _MyAppState extends State<MyApp> {
   int selectedIndex = 0;
   static const List<Widget> _pages = <Widget>[
-    Home(),
     Trending(),
+    Picker(),
     Text("Page 3"),
   ];
   
