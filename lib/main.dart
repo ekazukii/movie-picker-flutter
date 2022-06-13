@@ -2,13 +2,19 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:device_preview/device_preview.dart';
+
 import './trending.dart';
 import './picker.dart';
 import './saved.dart';
 
 void main() {
-  runApp(const AppContainer());
+  runApp(DevicePreview(
+    enabled: !kReleaseMode,
+    builder: (context) => const AppContainer(), // Wrap your app
+  ));
 }
 
 class AppContainer extends StatelessWidget {
@@ -16,7 +22,13 @@ class AppContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(title: "Hey hey", home: MyApp());
+    return MaterialApp(
+      title: "Hey hey",
+      home: const MyApp(),
+      useInheritedMediaQuery: true,
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
+    );
   }
 }
 
