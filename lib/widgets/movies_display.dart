@@ -14,14 +14,14 @@ class Movie {
   final String title;
   final String posterPath;
   final String overview;
-  final List<int> genresIds;
+  final List<int> genreIds;
 
   Movie({
     required this.id,
     required this.title,
     required this.posterPath,
     required this.overview,
-    required this.genresIds,
+    required this.genreIds,
   });
 
   factory Movie.fromJson(Map<String, dynamic> json) {
@@ -30,7 +30,7 @@ class Movie {
       title: json['title'],
       posterPath: json['poster_path'],
       overview: json['overview'],
-      genresIds: json['genres_ids'],
+      genreIds: json['genre_ids'].cast<int>(),
     );
   }
 }
@@ -45,7 +45,7 @@ class MoviesDisplay extends StatefulWidget {
 }
 
 class _MoviesDisplay extends State<MoviesDisplay> {
-  var favs = HashSet();
+  var favs = HashSet<String>();
 
   _MoviesDisplay() {
     getFavs();
@@ -53,23 +53,21 @@ class _MoviesDisplay extends State<MoviesDisplay> {
 
   void getFavs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    final stringList = prefs.getStringList('favs');
+    final stringList = prefs.getStringList('favs2');
 
-    if (stringList!.isEmpty) {
-      return setState(() {
-        favs = HashSet<int>();
-      });
-    }
-
-    final intList = stringList.map((e) => int.parse(e)).toList();
     setState(() {
-      favs = HashSet<int>.from(intList);
+      if (stringList == null) {
+        favs = HashSet<String>();
+        return;
+      }
+
+      favs = HashSet<String>.from(stringList);
     });
   }
 
   void setFavs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setStringList('favs', favs.map((e) => e.toString()).toList());
+    prefs.setStringList('favs2', favs.toList());
   }
 
   @override
@@ -92,16 +90,16 @@ class _MoviesDisplay extends State<MoviesDisplay> {
                 child: const Text("Plus d'info"),
               ),
               IconButton(
-                icon: favs.contains(movie.id)
+                icon: favs.contains("${movie.id}|${movie.posterPath}")
                     ? const Icon(Icons.favorite, color: Colors.red)
                     : const Icon(Icons.favorite_border),
                 tooltip: 'Ajoute le film aux favoris',
                 onPressed: () {
                   setState(() {
-                    if (favs.contains(movie.id)) {
-                      favs.remove(movie.id);
+                    if (favs.contains("${movie.id}|${movie.posterPath}")) {
+                      favs.remove("${movie.id}|${movie.posterPath}");
                     } else {
-                      favs.add(movie.id);
+                      favs.add("${movie.id}|${movie.posterPath}");
                     }
                     setFavs();
                   });
