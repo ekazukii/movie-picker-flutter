@@ -15,49 +15,85 @@ class Picker extends StatefulWidget {
 
 class _Picker extends State<Picker> {
   RangeValues _currentRangeValues = const RangeValues(30, 60);
-  double _minRank = 0.0;
+  double _minRank = 50;
   HashSet<String> _typesSelected = HashSet<String>();
   HashSet<int> _providersSelected = HashSet<int>();
+
+  String minutesToHoursAndMinutes(double mins) {
+    final hours = (mins / 60).floor();
+    final minutes = (mins % 60).floor();
+    return '$hours h $minutes min';
+  }
 
   @override
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        RangeSlider(
-            onChanged: (RangeValues newValues) {
+        Container(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: Column(children: [
+            const Text("Genre de film : "),
+            TypePicker(onChanged: (HashSet<String> vals) {
               setState(() {
-                _currentRangeValues = newValues;
+                _typesSelected = vals;
               });
-            },
-            divisions: 300,
-            labels: RangeLabels(
-              _currentRangeValues.start.round().toString(),
-              _currentRangeValues.end.round().toString(),
-            ),
-            max: 300,
-            min: 0,
-            values: _currentRangeValues),
-        TypePicker(onChanged: (HashSet<String> vals) {
-          setState(() {
-            _typesSelected = vals;
-          });
-        }),
-        ProvidersPicker(onChanged: (HashSet<int> vals) {
-          setState(() {
-            _providersSelected = vals;
-          });
-        }),
-        Slider(
-          value: _minRank,
-          min: 0.0,
-          max: 100.0,
-          divisions: 100,
-          onChanged: (double value) {
-            setState(() {
-              _minRank = value;
-            });
-          },
-        )
+            }),
+          ]),
+        ),
+        Container(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Column(
+              children: [
+                Text(
+                    'Qui dure entre : ${minutesToHoursAndMinutes(_currentRangeValues.start)} et ${minutesToHoursAndMinutes(_currentRangeValues.end)} '),
+                RangeSlider(
+                    onChanged: (RangeValues newValues) {
+                      setState(() {
+                        _currentRangeValues = newValues;
+                      });
+                    },
+                    divisions: 180,
+                    labels: RangeLabels(
+                      minutesToHoursAndMinutes(_currentRangeValues.start),
+                      minutesToHoursAndMinutes(_currentRangeValues.end),
+                    ),
+                    max: 180,
+                    min: 0,
+                    values: _currentRangeValues),
+              ],
+            )),
+        Container(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Column(
+              children: [
+                const Text("Sur les plateformes : "),
+                ProvidersPicker(onChanged: (HashSet<int> vals) {
+                  setState(() {
+                    _providersSelected = vals;
+                  });
+                }),
+              ],
+            )),
+        Container(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: Column(
+            children: [
+              Text("Avec une note minimum de ${_minRank.round()}% : "),
+              Slider(
+                value: _minRank,
+                label: _minRank.round().toString(),
+                min: 0.0,
+                max: 100.0,
+                divisions: 100,
+                onChanged: (double value) {
+                  setState(() {
+                    _minRank = value;
+                  });
+                },
+              )
+            ],
+          ),
+        ),
       ],
     );
   }
