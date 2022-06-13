@@ -15,12 +15,13 @@ class Picker extends StatefulWidget {
 
 class _Picker extends State<Picker> {
   RangeValues _currentRangeValues = const RangeValues(30, 60);
+  double _minRank = 0.0;
   HashSet<String> _typesSelected = HashSet<String>();
   HashSet<int> _providersSelected = HashSet<int>();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
       children: [
         RangeSlider(
             onChanged: (RangeValues newValues) {
@@ -46,6 +47,17 @@ class _Picker extends State<Picker> {
             _providersSelected = vals;
           });
         }),
+        Slider(
+          value: _minRank,
+          min: 0.0,
+          max: 100.0,
+          divisions: 100,
+          onChanged: (double value) {
+            setState(() {
+              _minRank = value;
+            });
+          },
+        )
       ],
     );
   }

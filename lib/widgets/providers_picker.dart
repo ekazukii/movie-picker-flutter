@@ -85,8 +85,11 @@ class _ProvidersPicker extends State<ProvidersPicker> {
     });
 
     return SizedBox(
-      height: 350,
-      child: GridView.count(crossAxisCount: 3, children: images),
+      height: 380,
+      child: GridView.count(
+          crossAxisCount: 3,
+          physics: const NeverScrollableScrollPhysics(),
+          children: images),
     );
   }
 }
