@@ -12,7 +12,7 @@ import './saved.dart';
 
 void main() {
   runApp(DevicePreview(
-    enabled: !kReleaseMode,
+    enabled: true,
     builder: (context) => const AppContainer(), // Wrap your app
   ));
 }
