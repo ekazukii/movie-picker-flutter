@@ -12,8 +12,8 @@ class TypePicker extends StatefulWidget {
 }
 
 class _TypePickerState extends State<TypePicker> {
-  HashMap<int, String> _types = HashMap<int, String>();
-  HashSet<String> _typesSelected = HashSet<String>();
+  final HashMap<int, String> _types = HashMap<int, String>();
+  final HashSet<String> _typesSelected = HashSet<String>();
 
   _TypePickerState() {
     _types.addAll({
