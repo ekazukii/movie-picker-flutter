@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import './trending.dart';
 import './picker.dart';
+import './saved.dart';
 
 void main() {
   runApp(const AppContainer());
@@ -15,10 +16,7 @@ class AppContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: "Hey hey",
-      home: MyApp()
-    );
+    return const MaterialApp(title: "Hey hey", home: MyApp());
   }
 }
 
@@ -35,9 +33,9 @@ class _MyAppState extends State<MyApp> {
   static const List<Widget> _pages = <Widget>[
     Trending(),
     Picker(),
-    Text("Page 3"),
+    Saved(),
   ];
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,19 +62,19 @@ class _MyAppState extends State<MyApp> {
         onTap: (int index) {
           onTapHandler(index);
         },
-      ), 
+      ),
     );
   }
 
-    void onTapHandler(int index)  {
-      setState(() {
-        selectedIndex = index;
-      });
-    }
+  void onTapHandler(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
+  }
 }
 
 class Home extends StatefulWidget {
-  const Home({ Key? key }) : super(key: key);
+  const Home({Key? key}) : super(key: key);
 
   @override
   State<Home> createState() => _Home();
@@ -86,7 +84,7 @@ class _Home extends State<Home> {
   // Counter
   int _count = 1;
 
-    void onPressed() {
+  void onPressed() {
     setState(() {
       _count++;
     });
@@ -94,9 +92,9 @@ class _Home extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return  Center(
+    return Center(
       child: ElevatedButton(
-        onPressed: onPressed, 
+        onPressed: onPressed,
         child: Text('$_count', style: Theme.of(context).textTheme.headline4),
       ),
     );

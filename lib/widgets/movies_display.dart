@@ -18,10 +18,10 @@ class Movie {
 
   Movie({
     required this.id,
-    required this.title,
+    this.title = "",
     required this.posterPath,
-    required this.overview,
-    required this.genreIds,
+    this.overview = "",
+    this.genreIds = const [],
   });
 
   factory Movie.fromJson(Map<String, dynamic> json) {
