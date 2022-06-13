@@ -23,7 +23,7 @@ class AppContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Hey hey",
+      title: "Awesome Movie Picker",
       home: const MyApp(),
       useInheritedMediaQuery: true,
       locale: DevicePreview.locale(context),
