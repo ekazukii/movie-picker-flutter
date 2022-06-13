@@ -51,9 +51,9 @@ class _TypePickerState extends State<TypePicker> {
           onChanged: (bool? value) {
             setState(() {
               if (value != null && value) {
-                _typesSelected.remove(key.toString());
-              } else {
                 _typesSelected.add(key.toString());
+              } else {
+                _typesSelected.remove(key.toString());
               }
             });
             widget.onChanged(_typesSelected);
@@ -66,6 +66,7 @@ class _TypePickerState extends State<TypePicker> {
       height: 250,
       child: Scrollbar(
         child: ListView(
+          primary: false,
           children: widgets,
         ),
       ),
