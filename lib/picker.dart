@@ -3,8 +3,8 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
 
-import './widgets/typePicker.dart';
-import './widgets/providersPicker.dart';
+import 'widgets/type_picker.dart';
+import 'widgets/providers_picker.dart';
 
 class Picker extends StatefulWidget {
   const Picker({Key? key}) : super(key: key);
