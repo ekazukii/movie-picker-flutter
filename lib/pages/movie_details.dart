@@ -28,7 +28,7 @@ class _MovieDetails extends State<MovieDetails> {
 
   getMovie() async {
     final response = await http.get(Uri.parse(
-        'http://localhost:3000/api/getDetailsOfMovie?id=${widget.id}&region=fr-FR'));
+        'https://amp.ekazuki.fr/api/getDetailsOfMovie?id=${widget.id}&region=fr-FR'));
 
     if (response.statusCode == 200) {
       final data = jsonDecode(utf8.decode(response.bodyBytes));
@@ -41,7 +41,6 @@ class _MovieDetails extends State<MovieDetails> {
         data["genres"].forEach((e) {
           //print(e);
           types.add(e["name"].toString());
-          print(e["name"]);
           //print(e["names"].runtimeType);
         });
       });
@@ -57,8 +56,6 @@ class _MovieDetails extends State<MovieDetails> {
         ),
       );
     }
-
-    print(types.runtimeType);
 
     return Scaffold(
         appBar: AppBar(

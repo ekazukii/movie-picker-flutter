@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'widgets/type_picker.dart';
 import 'widgets/providers_picker.dart';
+import './pages/picker_result.dart';
 
 class Picker extends StatefulWidget {
   const Picker({Key? key}) : super(key: key);
@@ -94,6 +95,24 @@ class _Picker extends State<Picker> {
             ],
           ),
         ),
+        Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: ElevatedButton(
+              child: const Text("Rechercher"),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PickerResult(
+                      duration: _currentRangeValues,
+                      minRank: _minRank,
+                      types: _typesSelected,
+                      providers: _providersSelected,
+                    ),
+                  ),
+                );
+              },
+            ))
       ],
     );
   }
