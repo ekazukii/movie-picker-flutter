@@ -1,6 +1,7 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../pages/movie_details.dart';
 // typedef Movie = {
 //   'id': int,
 //   'title': String,
@@ -86,7 +87,14 @@ class _MoviesDisplay extends State<MoviesDisplay> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MovieDetails(id: movie.id),
+                    ),
+                  );
+                },
                 child: const Text("Plus d'info"),
               ),
               IconButton(
